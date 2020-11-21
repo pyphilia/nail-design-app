@@ -1,0 +1,3 @@
+https://github.com/omnidan/redux-undo - can exclude action
+
+https://github.com/konvajs/react-konva/issues/305 : export stage

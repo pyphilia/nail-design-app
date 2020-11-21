@@ -1,0 +1,14 @@
+#toolbar {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: lightblue;
+  z-index: 3;
+  padding: 10px;
+  font-size: 40px;
+}
+
+#toolbar .shape:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

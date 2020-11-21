@@ -1,0 +1,76 @@
+#layerManager {
+  height: 100%;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 5;
+  width: 25%;
+  padding: 10px;
+}
+
+.layerManagerElement {
+  background: white;
+  border: 1px solid black;
+  max-height: 50%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.layerManagerElement:hover {
+  cursor: pointer;
+}
+
+.selected {
+  border-width: 5px;
+}
+
+.layerElement {
+  border-top: 1px solid black;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.visible {
+  padding: 5px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.name {
+  font-weight: bold;
+  display: inline-block;
+  width: 50%;
+}
+
+.backgroundColor {
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
+
+.colorPickerPopUp {
+  position: absolute;
+  z-index: 10;
+}
+
+.cover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.customData label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.addCustomData input {
+  display: inline-block;
+  width: 40%;
+}
+
+.addCustomData button {
+  width: 10%;
+}

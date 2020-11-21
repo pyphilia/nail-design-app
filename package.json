@@ -1,0 +1,69 @@
+{
+  "name": "interactive-plans",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "clsx": "^1.1.0",
+    "immutable": "^4.0.0-rc.12",
+    "konva": "^4.2.2",
+    "node-fetch": "^2.6.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-color": "^2.18.1",
+    "react-dom": "^16.13.1",
+    "react-draggable": "^4.4.3",
+    "react-konva": "^16.13.0-0",
+    "react-redux": "^7.2.0",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
+    "redux-undo": "^1.0.1",
+    "typescript": "3.6.2",
+    "use-image": "^1.0.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prettier:write": "prettier --write \"src/**/*.{ts,tsx,css,js}\"",
+    "eslint": "eslint \"src/**/*.{ts,tsx,js}\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/node-fetch": "^2.5.7",
+    "@types/react": "^16.9.0",
+    "@types/react-color": "^3.0.4",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.7",
+    "@types/redux": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "^2.0.2",
+    "redux-devtools-extension": "^2.13.8"
+  }
+}
