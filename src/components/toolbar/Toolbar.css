@@ -1,14 +1,16 @@
 #toolbar {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 55px;
+  right: 15px;
   background: lightblue;
   z-index: 3;
   padding: 10px;
   font-size: 40px;
 }
 
-#toolbar .shape:hover {
-  cursor: pointer;
-  opacity: 0.8;
+#toolbar .color {
+  width:30px;
+  height:30px;
+  border-radius: 50px;
+  margin:10px
 }

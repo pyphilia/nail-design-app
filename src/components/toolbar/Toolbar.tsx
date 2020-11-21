@@ -1,69 +1,37 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { PRESENT, SHAPES } from "../../config/constants";
 import "./Toolbar.css";
 import { RootState } from "../../reducers";
-import { addElement } from "../../actions/layers";
+import {setColor} from "../../actions/hand"
 
 const mapDispatchToProps = {
-  dispatchAddElement: addElement,
+  dispatchSetColor: setColor,
 };
 
-const mapStateToProps = ({ layers, canvas }: RootState) => ({
-  layers: layers[PRESENT].get("layers"), //.toJS(),
-  selected: layers[PRESENT].getIn(["selected", "layer"]),
-  stageOffset: canvas.getIn(["stage", "offset"]),
-  scale: canvas.getIn(["stage", "scale"]),
-  currentLayer: layers[PRESENT].getIn(["selected", "layer"]),
-});
+// const mapStateToProps = ({ layers, canvas }: RootState) => ({
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+// });
+
+const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & {};
 
 class Toolbar extends React.Component<Props> {
-  addElement = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const target = e.target as HTMLButtonElement;
-    const shape = target.dataset.shape as string;
-    const { dispatchAddElement, stageOffset, scale, currentLayer } = this.props;
-
-    const { x: left, y: top } = stageOffset;
-    const x = (window.innerWidth / 2 - left) / scale;
-    const y = (window.innerHeight / 2 - top) / scale;
-
-    const layerName = currentLayer;
-
-    // build default name
-    const name = shape.toLowerCase();
-
-    dispatchAddElement({ shape, x, y, layerName, name });
+  setColor = ({color}: {color:string}) => {
+    const { dispatchSetColor } = this.props
+    dispatchSetColor({color});
   };
 
   public render() {
+
+    const colors = ["black", "white", "red", "yellow", "#fff000"]
+
     return (
       <div id="toolbar">
-        <div
-          className="shape"
-          data-shape={SHAPES.RECTANGLE}
-          onClick={this.addElement}
-        >
-          ■
-        </div>
-        <div
-          className="shape"
-          data-shape={SHAPES.CIRCLE}
-          onClick={this.addElement}
-        >
-          ⬤
-        </div>
-        <div
-          className="shape"
-          data-shape={SHAPES.TEXT}
-          onClick={this.addElement}
-        >
-          T
-        </div>
+        {colors.map(color => (
+        <div className="color" key={color} style={{backgroundColor: color}} onClick={() => this.setColor({color})}/>
+        ))}
       </div>
     );
   }

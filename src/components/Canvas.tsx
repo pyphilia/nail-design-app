@@ -1,26 +1,18 @@
 import React from "react";
 import { List } from "immutable";
-import { Stage, Layer } from "react-konva";
+import { Stage, Layer, Line } from "react-konva";
 import { connect, ConnectedProps } from "react-redux";
-import Rectangle from "./elements/Rectangle";
-import Circle from "./elements/Circle";
-import Text, { TextProps } from "./elements/Text";
+import Background from "./Background";
 import { PRESENT, SHAPES, ZOOM_POWER } from "../config/constants";
-import Element, { CircleProps } from "../classes/Element";
-import LayerClass from "../classes/Layer";
 import {
   moveElement,
   transformElement,
   selectElement,
 } from "../actions/layers";
-import {
-  MoveElementPayloadType,
-  TransformElementPayloadType,
-} from "../types/LayerActionTypes";
 import { RootState } from "../reducers";
 import { setStageOffset, setStageScale } from "../actions/canvas";
-import { SetElementTextPayloadType } from "../types/ElementActionTypes";
 import { setElementText } from "../actions/element";
+import Nail from "./elements/Nail";
 
 const mapDispatchToProps = {
   dispatchMoveElement: moveElement,
@@ -31,11 +23,12 @@ const mapDispatchToProps = {
   dispatchSetElementText: setElementText,
 };
 
-const mapStateToProps = ({ layers, canvas }: RootState) => ({
+const mapStateToProps = ({ layers, canvas, hand }: RootState) => ({
   layers: layers[PRESENT].get("layers"), //.toJS(),
   selectedLayer: layers[PRESENT].getIn(["selected", "layer"]),
   selectedElementId: layers[PRESENT].getIn(["selected", "element"]),
   stageScale: canvas.getIn(["stage", "scale"]),
+  nailColor: hand.getIn(["nails", "color"])
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -126,6 +119,7 @@ class Canvas extends React.Component<Props, State> {
       dispatchSetElementText,
       selectedLayer,
       selectedElementId,
+      nailColor
     } = this.props;
 
     if (!layers || layers.size === 0) {
@@ -150,96 +144,54 @@ class Canvas extends React.Component<Props, State> {
           }}
           draggable
         >
-          {layers.map((layer: LayerClass, i: number) => {
-            const elements: List<Element> = layer.get("elements");
-            const isLayerSelected = i === selectedLayer;
-            return (
-              <Layer key={i} name={layer.get("name")}>
-                {elements.map((element: Element, k: number) => {
-                  const elementId = element.get("id");
-
-                  if (!element.get("isVisible")) {
-                    return null;
-                  }
-
-                  const isSelected = elementId === selectedElementId;
-                  const shape = element.get("shape");
-                  switch (shape) {
-                    case SHAPES.RECTANGLE:
-                      return (
-                        <Rectangle
-                          key={k}
-                          shapeProps={element}
-                          isSelected={isSelected}
-                          isLayerSelected={isLayerSelected}
-                          onSelect={() => {
-                            dispatchSelectElement(elementId);
-                          }}
-                          onMove={(payload: MoveElementPayloadType) => {
-                            dispatchMoveElement(payload);
-                          }}
-                          onTransform={(
-                            payload: TransformElementPayloadType
-                          ) => {
-                            dispatchTransformElement(payload);
-                          }}
-                        />
-                      );
-
-                    case SHAPES.CIRCLE:
-                      return (
-                        <Circle
-                          key={k}
-                          shapeProps={element as CircleProps}
-                          isSelected={isSelected}
-                          isLayerSelected={isLayerSelected}
-                          onSelect={() => {
-                            dispatchSelectElement(elementId);
-                          }}
-                          onMove={(payload: MoveElementPayloadType) => {
-                            dispatchMoveElement(payload);
-                          }}
-                          onTransform={(
-                            payload: TransformElementPayloadType
-                          ) => {
-                            dispatchTransformElement(payload);
-                          }}
-                        />
-                      );
-
-                    case SHAPES.TEXT:
-                      return (
-                        <Text
-                          key={k}
-                          onSetText={(payload: SetElementTextPayloadType) => {
-                            dispatchSetElementText(payload);
-                          }}
-                          layerId={selectedLayer}
-                          shapeProps={element as TextProps}
-                          isSelected={isSelected}
-                          isLayerSelected={isLayerSelected}
-                          onSelect={() => {
-                            dispatchSelectElement(elementId);
-                          }}
-                          onMove={(payload: MoveElementPayloadType) => {
-                            dispatchMoveElement(payload);
-                          }}
-                          onTransform={(
-                            payload: TransformElementPayloadType
-                          ) => {
-                            dispatchTransformElement(payload);
-                          }}
-                        />
-                      );
-
-                    default:
-                      console.log(`unhandled shape : ${shape}`);
-                      return null;
-                  }
-                })}
-              </Layer>
-            );
-          })}
+          <Layer>
+            <Background />
+            <Nail
+              fill={nailColor}
+              x={165}
+              y={320}
+              rotation={-20}
+              width={50}
+              length={90}
+              tension={0.3}
+            />
+            <Nail
+              fill={nailColor}
+              x={93}
+              y={500}
+              rotation={-20}
+              length={70}
+              width={40}
+              tension={0.3}
+            />
+            <Nail
+              fill={nailColor}
+              x={287}
+              y={220}
+              rotation={-20}
+              length={90}
+              width={55}
+              tension={0.3}
+            />
+            <Nail
+              fill={nailColor}
+              x={418}
+              y={230}
+              rotation={-20}
+              length={90}
+              width={52}
+              tension={0.3}
+            />
+            <Nail
+              fill={nailColor}
+              x={888}
+              y={540}
+              rotation={25}
+              length={110}
+              width={45}
+              tension={0.3}
+            />
+          </Layer>
         </Stage>
       </>
     );

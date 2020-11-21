@@ -32,7 +32,6 @@ class App extends React.Component<Props> {
       <div className="App">
         <Canvas />
         <UndoButton />
-        <LayerManager />
         <Toolbar />
       </div>
     );
